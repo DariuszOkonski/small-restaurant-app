@@ -4,6 +4,7 @@ import Create from './pages/create/Create';
 import Home from './pages/home/Home';
 import Recipe from './pages/recipe/Recipe';
 import Search from './pages/search/Search';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
       <header className="App-header">
 
         <BrowserRouter>
-          <Switch>
-            
+          <Navbar />
+
+          <Switch>            
             <Route exact path='/'>
               <Home />
             </Route>
