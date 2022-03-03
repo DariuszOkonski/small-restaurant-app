@@ -17,7 +17,7 @@
 }
 
 .recipe-list .card:hover {
-    transform: rotate(3deg);
+    transform: scale(1.1);
 }
 
 .recipe-list .card h3 {
