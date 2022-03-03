@@ -8,33 +8,33 @@ import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+      <div className="App">
+        <header className="App-header">
 
-        <BrowserRouter>
-          <Navbar />
+          <BrowserRouter>
+            <Navbar />
 
-          <Switch>            
-            <Route exact path='/'>
-              <Home />
-            </Route>
+            <Switch>            
+              <Route exact path='/'>
+                <Home />
+              </Route>
 
-            <Route path='/create'>
-              <Create/>
-            </Route>
+              <Route path='/create'>
+                <Create/>
+              </Route>
 
-            <Route path='/search'>
-              <Search/>
-            </Route>
+              <Route path='/search'>
+                <Search/>
+              </Route>
 
-            <Route path='/recipe/:id'>
-              <Recipe/>
-            </Route>
-          </Switch>
-        </BrowserRouter>
+              <Route path='/recipe/:id'>
+                <Recipe/>
+              </Route>
+            </Switch>
+          </BrowserRouter>
 
-      </header>
-    </div>
+        </header>
+      </div>
   );
 }
 

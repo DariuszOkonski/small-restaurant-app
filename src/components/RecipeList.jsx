@@ -2,8 +2,6 @@ import { Link } from 'react-router-dom';
 import './RecipeList.css';
 
 export default function RecipeList({ recipes }) {
-    console.log(recipes)
-
     if(recipes.length === 0) {
         return (
             <div className='error'>
