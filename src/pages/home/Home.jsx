@@ -12,8 +12,11 @@ export default function Home() {
   useEffect(() => {
     setIsPending(true);
     
-    projectFirestore.collection('recipes').get()
-      .then((snapshot) => {
+    // onSnapshot it is firestore method
+    // onSnapshot is listening if there are any changes in db
+    // if there is a change it brings those data again ex. after removing one element from db
+    // there can't be also catch() element
+    const unsub = projectFirestore.collection('recipes').onSnapshot((snapshot) => {
           if(snapshot.empty) {
             setError('No recipies to load');
             setIsPending(false);
@@ -28,12 +31,13 @@ export default function Home() {
             setError(false);
             setData(results);
           }
-      })
-      .catch(err => {
+      }, (err) => {
         setError(err.message);
-        setIsPending(false)
+        setIsPending(false);
       })
 
+      return () => unsub();
+      
   }, [])
   
 
