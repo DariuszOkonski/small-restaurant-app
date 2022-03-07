@@ -1,5 +1,4 @@
 import './Recipe.css';
-// import useFetch from './../../hooks/useFetch';
 import { useParams } from 'react-router-dom';
 import { useTheme } from './../../hooks/useTheme';
 import { useEffect, useState } from 'react';
@@ -16,8 +15,7 @@ export default function Recipe() {
   useEffect(() => {
     setIsPending(true);
 
-    projectFirestore.collection('recipes').doc(id).get()
-      .then((doc) => {
+    const unsub = projectFirestore.collection('recipes').doc(id).onSnapshot((doc) => {
         if(!doc.exists) {
             setIsPending(false);
             setError('Could not find that recipe')
@@ -27,13 +25,18 @@ export default function Recipe() {
           setData(doc.data())
         }
 
-      })
-      .catch(err => {
+      }, (err) => {
         setError(err);
-      })
+      });
 
+      return () => unsub();
   }, [id])
   
+  const handleClick = () => {
+    projectFirestore.collection('recipes').doc(id).update({
+      title: 'Something completely different'
+    })
+  }
 
   return (
     <div className={`recipe ${mode}`}>
@@ -50,6 +53,7 @@ export default function Recipe() {
               { data.ingredients.map(ing => <li key={ing}>{ing}</li>) }
             </ul>
             <p className="method">{data.method}</p>
+            <button onClick={handleClick}>Update me</button>
           </>
         )
       }
